@@ -1,0 +1,59 @@
+1. Component Hierarchy. You've already done this, via the use of various components,
+such as FunStuff, WelcomeBar, etc.
+2. Stateful Components - stuff like unto the Edit, Save etc functions of the Contact List,
+which track the data of the current State. Maybe yours could track something typed, etc? A name?
+3. Routing with 3 or more Routes, see the other Week 6 Labs
+4. Parameterised URLs - see other Week 6 Labs
+(NB: The code for this is used in the Phone Catalogue app, and it will be useful for your
+'going to different pages in the adventure when you press a button'
+5. Multiple Data Models
+6. Nested data
+
+(Hackernews has good examples of how to use layered, nested data and multiple data models)
+
+NEXT:
+
+Heya! The testing API actually works rather well! I can now add tests to certain pages, based on a number of different
+stats, with a number of different difficulty levels, and the screen will render them all. The only trouble is that for the
+moment, the this.props.routes.character.strength, while the valid way to refer to the strength stat that's sent in, seems to
+return an invalid value, which of course makes calculations with them fail.
+
+
+-MOST IMPORTANT: Statefulness. State could be represented by stats, by an inventory system, or a way of typing things into a form (this sort of things is inside the examples)
+-Reroute / (basic route) to localhost:3000/area1start
+-Stat checks - the ability to gain stats and test them on challenges?
+
+TESTS ARE OF THIS FORM:
+Each test has a threshold, which is the level you need in that stat to have a 50% chance of success in the test.
+For instance, if you have a Strength test where a STR 10 character has a 50% success chance, then the Threshold
+for that test is 10. For each point higher than the Threshold you are, you get a 10% increase (additive) to your chance
+of success. This works thusly: Each test is a simple roll of a d10. A roll of 6+ is a success, lower is a failure. Each
+roll is modified by the MODIFIER value, which is your value (STR in this case) - the Threshold. For instance, with Threshold
+10 and STR 10, the MODIFIER is 0, so it's D10+0, which'll result in a 50% success rate. With Threshold 10 and STR 12, the 
+MODIFIER will be +2, so it's D10+2, a 70% chance to get 6+. With STR 9, the MODIFIER is -1,
+which results in D10 - 1, which has a 40% chance to produce a 6+.
+
+-The "back" function
+
+Connect / with /area1start. That's what you need to do first.
+
+Wednesday 22nd March:
+It's almost as if, by the time the buttons are pressed, only the last element of the tests[] array is present, so it cannot 
+carry out the first of the two tests. 
+
+I'VE GOTTEN A BEAD ON IT, or something like a bead. The problem is this: by the time the buttons are properly created,
+there's only one value left for testName, thresh, stat -> the values of the final element in the array. Need some way
+to save them outside of the loop. It'd be very ugly, but perhaps we could set up 'btn1Name', 'btn1Thresh', etc, and during the loop,
+check the value of i and transmit the value of the name into btn1Name, then if i is 0, btn1name is used for the name?
+As I said, hideous, but it might work.
+
+..Turns out it did. And while it *is* ugly (very ugly), 
+
+HANG ON, though. The / page is handled differently by the router, since it very obviously doesn't have an /:advId URL. It's not
+going to be able to take in the value of advId. However, it might be able to do something else. You might be able to use the
+<Link to...> from hackerNews/app.js in order to get to the AdventurePages. However, since
+we're already using <a href></a> elements, that might not be necessary after all. In any case, make the main
+page somehow link to the page of the first fork of the Adventure. Then it ought to be able to link
+in to the AdventurePage code somehow. 
+
+Ask about what kind of document/writeup you need
