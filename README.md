@@ -1,11 +1,10 @@
 # Assignment 1 - ReactJS app.
 ParaQuest App
 
-Name: ... your name ...
-Eoin Moloney, Student 20053732
+Name: Eoin Moloney, Student 20053732
+
 
 ## Overview.
-...... A statement of the app concept and objectives (about a half-page) ........
 
 The App is a browser-based game. It consists of a number of interconnected 'Pages', which the user can navigate between via interacting
 with the various Components on screen. Each Page includes a text description of a particular environment, and a list of possible options
@@ -16,11 +15,11 @@ a second set of statistics, "Menaces", which track harm done to their character 
 as attempting a test and failing it) can increase Menaces. If a Menace exceeds a certain amount, a penalty will be applied to the player
 (such as dying and needing to restart the game).
 
- . . . . . List of user features (excluding user registration and authentication) . . . . 
+ The App features:
  
  + Dynamic Routing through parameterised URLs, which are tracked by way of a complex array of interconnected objects
  + Randomisation, carried out by API and used together with stats to determine the outcome of tests. 
-
+ + Rudimentary Inventory system carried out via routing
 
 ## Installation requirements.
 + ReactJS v15.4.2
@@ -54,23 +53,25 @@ A diagram showing the app's hierarchical component design (see example below).
 (screen)
 
 ## Routing.
-. . . . List each route supported and state the associated view . . . . . 
 
 + /:advID - routes the player to an AdventureView, with data based on the advID
++ /:advID/inventory - routes the player to their inventory via 'Inventory' view. Placing it after /:advId allows the player to quickly return from the Inventory Screen to their previous state
++ /:advID/inventory/:itemId - routes the player to the description of a particular item, providing them with extra information about it via the 'Item' view
 
 ## Extra features
 
-. . . . . Briefly explain any non-standard features, functional or non-functional (e.g. user registration, authentication) developed for the app . . . . . .  
 The app also features a random number generator, created in the API via the math.random method. This is used to determine whether or not a user
 passed a test, when they take one.
-
+The app features a system that allows the player to inspect their inventory, showing all their current items as well as detailed descriptions of such.
+The inventory, like the Stats variable, is held in the root App Component, as that is a parent of all the Components that need to know about such data.
+A system to persist changes to State, such as the addition/removal of Weapons and Stats, was planned. This system was never finished due to lack of time, however.
 
 ## Independent learning.
 
-. . . . . State the non-standard aspects of Angular (or other related technologies) that you researched and applied in this assignment . . . . .  
--The proper use of browserhistory.push() to programmatically go to a certain route
--
++The proper use of browserhistory.push() to programmatically go to a certain route
++The correct use of random() to generate pseudorandom numbers for use with the Tests
++The use of callbacks to pass state between Parent components and Child components (not finished, but studied)
 
-[image1]: ./model.png
-[image2]: ./design.jpg
-[image3]: ./screen.png
+[image1]: ./src/images/Data Model.jpg
+[image2]: ./src/images/Hierarchical Model.jpg
+[image3]: ./src/images/AdventurePic1.jpg
